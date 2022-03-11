@@ -24,18 +24,18 @@ typedef struct org_tree {
 
 	static node* find(node* root, const string& value) {
 
-		if (root == NULL) //Å½»ö ½ÇÆĞ 
+		if (root == NULL) //íƒìƒ‰ ì‹¤íŒ¨ 
 			return NULL;
 
-		if (root->position == value) //root¿¡¼­ ¹Ù·Î Ã£¾ÒÀ» ¶§
+		if (root->position == value) //rootì—ì„œ ë°”ë¡œ ì°¾ì•˜ì„ ë•Œ
 			return root;
 
-		auto firstFound = org_tree::find(root->first, value); //¿ŞÂÊ ÀÚ½Ä ³ëµå·Î Å½»ö 
+		auto firstFound = org_tree::find(root->first, value); //ì™¼ìª½ ìì‹ ë…¸ë“œë¡œ íƒìƒ‰ 
 
-		if (firstFound != NULL) //¾øÀ¸¸é 
+		if (firstFound != NULL) //ì—†ìœ¼ë©´ 
 			return firstFound;
 
-		return org_tree::find(root->second, value); //¿À¸¥ÂÊ ÀÚ½Ä ³ëµå·Î Å½»ö 
+		return org_tree::find(root->second, value); //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œë¡œ íƒìƒ‰ 
 	}
 
 	bool addSubordinate(const string& manager, const string& subordinate) {
@@ -43,23 +43,23 @@ typedef struct org_tree {
 		auto managerNode = org_tree::find(root, manager);
 
 		if (!managerNode) {
-			cout << manager << "À»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù. " << endl;
+			cout << manager << "ì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. " << endl;
 			return false;
 		}
 
-		if (managerNode->first && managerNode->second) { //ÀÌ¹Ì ÀÚ½Ä ³ëµå ²Ë Ã¡À» ¶§
-			cout << manager << " ¾Æ·¡¿¡" << subordinate << "À»(¸¦) Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù. " << endl;
+		if (managerNode->first && managerNode->second) { //ì´ë¯¸ ìì‹ ë…¸ë“œ ê½‰ ì°¼ì„ ë•Œ
+			cout << manager << " ì•„ë˜ì—" << subordinate << "ì„(ë¥¼) ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. " << endl;
 			return false;
 		}
 
 		if (!managerNode->first) {
-			managerNode->first = new node{ subordinate, NULL, NULL }; //¿ŞÂÊ ÀÚ½Ä³ëµå Ãß°¡
+			managerNode->first = new node{ subordinate, NULL, NULL }; //ì™¼ìª½ ìì‹ë…¸ë“œ ì¶”ê°€
 		}
 		else {
-			managerNode->second = new node{ subordinate, NULL, NULL }; //¿À¸¥ÂÊ ÀÚ½Ä³ëµå Ãß°¡ 
+			managerNode->second = new node{ subordinate, NULL, NULL }; //ì˜¤ë¥¸ìª½ ìì‹ë…¸ë“œ ì¶”ê°€ 
 		}
 
-		cout << manager << " ¾Æ·¡¿¡ " << subordinate << "À»(¸¦) Ãß°¡Çß½À´Ï´Ù." << endl;
+		cout << manager << " ì•„ë˜ì— " << subordinate << "ì„(ë¥¼) ì¶”ê°€í–ˆìŠµë‹ˆë‹¤." << endl;
 		return true;
 	}
 
@@ -101,7 +101,7 @@ typedef struct org_tree {
 		while (!q.empty()) {
 			int size = q.size();
 
-			//ÇöÀç qÀÇ size´Â ÇÑ level¿¡ µé¾îÀÖ´Â ¿ø¼Ò ¼ö
+			//í˜„ì¬ qì˜ sizeëŠ” í•œ levelì— ë“¤ì–´ìˆëŠ” ì›ì†Œ ìˆ˜
 			for (int i = 0; i < size; i++) {
 				auto current = q.front();
 				q.pop();
@@ -124,14 +124,14 @@ int main(void) {
 
 	auto tree = org_tree::create_org_structure("CEO");
 
-	tree.addSubordinate("CEO", "ºÎ»çÀå");
-	tree.addSubordinate("ºÎ»çÀå", "ITºÎÀå");
-	tree.addSubordinate("ºÎ»çÀå", "¸¶ÄÉÆÃºÎÀå");
-	tree.addSubordinate("ITºÎÀå", "º¸¾ÈÆÀÀå");
-	tree.addSubordinate("ITºÎÀå", "¾Û°³¹ßÆÀÀå");
-	tree.addSubordinate("¸¶ÄÉÆÃºÎÀå", "¹°·ùÆÀÀå");
-	tree.addSubordinate("¸¶ÄÉÆÃºÎÀå", "È«º¸ÆÀÀå");
-	tree.addSubordinate("ºÎ»çÀå", "Àç¹«ºÎÀå");
+	tree.addSubordinate("CEO", "ë¶€ì‚¬ì¥");
+	tree.addSubordinate("ë¶€ì‚¬ì¥", "ITë¶€ì¥");
+	tree.addSubordinate("ë¶€ì‚¬ì¥", "ë§ˆì¼€íŒ…ë¶€ì¥");
+	tree.addSubordinate("ITë¶€ì¥", "ë³´ì•ˆíŒ€ì¥");
+	tree.addSubordinate("ITë¶€ì¥", "ì•±ê°œë°œíŒ€ì¥");
+	tree.addSubordinate("ë§ˆì¼€íŒ…ë¶€ì¥", "ë¬¼ë¥˜íŒ€ì¥");
+	tree.addSubordinate("ë§ˆì¼€íŒ…ë¶€ì¥", "í™ë³´íŒ€ì¥");
+	tree.addSubordinate("ë¶€ì‚¬ì¥", "ì¬ë¬´ë¶€ì¥");
 
 	cout << endl;
 	tree.preOrder(tree.root);
