@@ -37,10 +37,10 @@ typedef struct bst {
 	}
 
 	void deleteValue(int value) {
-		root = delete_impl(root, value); //Æ®¸® °»½Å 
+		root = delete_impl(root, value); //íŠ¸ë¦¬ ê°±ì‹  
 	}
 
-private: //¿ÜºÎ¿¡¼­ Á÷Á¢ È£ÃâÇÒ ¼ö ¾øµµ·Ï
+private: //ì™¸ë¶€ì—ì„œ ì§ì ‘ í˜¸ì¶œí•  ìˆ˜ ì—†ë„ë¡
 	node* find_impl(node* current, int value) {
 		if (!current) {
 			cout << endl;
@@ -48,22 +48,22 @@ private: //¿ÜºÎ¿¡¼­ Á÷Á¢ È£ÃâÇÒ ¼ö ¾øµµ·Ï
 		}
 
 		if (current->data == value) {
-			cout << value << "À»(¸¦) Ã£¾Ò½À´Ï´Ù." << endl;
+			cout << value << "ì„(ë¥¼) ì°¾ì•˜ìŠµë‹ˆë‹¤." << endl;
 			return current;
 		}
 
 		if (value < current->data) {
-			cout << current->data << "¿¡¼­ ¿ŞÂÊÀ¸·Î ÀÌµ¿: ";
+			cout << current->data << "ì—ì„œ ì™¼ìª½ìœ¼ë¡œ ì´ë™: ";
 			return find_impl(current->left, value);
 		}
 
-		cout << current->data << "¿¡¼­ ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿: ";
+		cout << current->data << "ì—ì„œ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™: ";
 		return find_impl(current->right, value);
 	}
 
 	void insert_impl(node* current, int value) {
 
-		if (value < current->data) { //¿ŞÂÊ ¼­ºê Æ®¸®¿¡ Ãß°¡ 
+		if (value < current->data) { //ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ì— ì¶”ê°€ 
 			if (current->left == NULL) {
 				current->left = new node{ value, NULL, NULL };
 			}
@@ -89,36 +89,36 @@ private: //¿ÜºÎ¿¡¼­ Á÷Á¢ È£ÃâÇÒ ¼ö ¾øµµ·Ï
 		inorder_impl(current->right);
 	}
 
-	node* delete_impl(node* current, int value) { //°»½Å µÇ¾î¾ß µÇ´Â ³ëµå ¸®ÅÏ 
+	node* delete_impl(node* current, int value) { //ê°±ì‹  ë˜ì–´ì•¼ ë˜ëŠ” ë…¸ë“œ ë¦¬í„´ 
 
-		if (!current) //»èÁ¦ÇÒ ³ëµå ¾øÀ» ¶§
+		if (!current) //ì‚­ì œí•  ë…¸ë“œ ì—†ì„ ë•Œ
 			return NULL;
 
-		if (value < current->data) { //¿ŞÂÊ ¼­ºê Æ®¸®·Î ÀÌµ¿ 
-			current->left = delete_impl(current->left, value); //¿ŞÂÊ ÀÚ½Ä ³ëµå °»½Å
+		if (value < current->data) { //ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ë¡œ ì´ë™ 
+			current->left = delete_impl(current->left, value); //ì™¼ìª½ ìì‹ ë…¸ë“œ ê°±ì‹ 
 		}
-		else if (value > current->data) { //¿À¸¥ÂÊ ¼­ºê Æ®¸®·Î ÀÌµ¿
-			current->right = delete_impl(current->right, value); //¿À¸¥ÂÊ ÀÚ½Ä ³ëµå °»½Å 
+		else if (value > current->data) { //ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ë¡œ ì´ë™
+			current->right = delete_impl(current->right, value); //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ ê°±ì‹  
 		}
-		else { //»èÁ¦ÇÒ ³ëµå Ã£À½
-			if (!current->left) { //»èÁ¦ÇÒ ³ëµåÀÇ ¿ŞÂÊ ÀÚ½Ä ¾øÀ» ¶§ -> ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå·Î ´ëÃ¼ 
+		else { //ì‚­ì œí•  ë…¸ë“œ ì°¾ìŒ
+			if (!current->left) { //ì‚­ì œí•  ë…¸ë“œì˜ ì™¼ìª½ ìì‹ ì—†ì„ ë•Œ -> ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œë¡œ ëŒ€ì²´ 
 				auto tmp = current->right;
 				delete current;
-				return tmp; //»èÁ¦ÇÑ ³ëµå ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå Æ÷ÀÎÅÍ
+				return tmp; //ì‚­ì œí•œ ë…¸ë“œ ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ í¬ì¸í„°
 			}
 
-			if (!current->right) { //¿À¸¥ÂÊ ÀÚ½Ä ³ëµå ¾øÀ» ¶§ -> ¿ŞÂÊ ÀÚ½Ä ³ëµå·Î ´ëÃ¼ 
+			if (!current->right) { //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ ì—†ì„ ë•Œ -> ì™¼ìª½ ìì‹ ë…¸ë“œë¡œ ëŒ€ì²´ 
 				auto tmp = current->left;
 				delete current;
-				return tmp; //»èÁ¦ÇÑ ³ëµå ¿ŞÂÊ ÀÚ½Ä ³ëµå Æ÷ÀÎÅÍ 
+				return tmp; //ì‚­ì œí•œ ë…¸ë“œ ì™¼ìª½ ìì‹ ë…¸ë“œ í¬ì¸í„° 
 			}
 
-			//ÀÚ½Ä ³ëµå µÑ ´Ù ÀÖÀ» °æ¿ì
-			auto succNode = successor(current); //¿À¸¥ÂÊ ¼­ºê Æ®¸®¿¡¼­ °¡Àå ÀÛÀº ³ëµå 
+			//ìì‹ ë…¸ë“œ ë‘˜ ë‹¤ ìˆì„ ê²½ìš°
+			auto succNode = successor(current); //ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ì—ì„œ ê°€ì¥ ì‘ì€ ë…¸ë“œ 
 			current->data = succNode->data;
 
-			//¿À¸¥ÂÊ ¼­ºê Æ®¸®¿¡¼­ ÈÄ¼ÓÀ» Ã£¾Æ »èÁ¦
-			current->right = delete_impl(current->right, succNode->data); //¿À¸¥ÂÊ ÀÚ½Ä ³ëµå °»½Å 
+			//ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ì—ì„œ í›„ì†ì„ ì°¾ì•„ ì‚­ì œ
+			current->right = delete_impl(current->right, succNode->data); //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ ê°±ì‹  
 		}
 
 		return current;
@@ -140,7 +140,7 @@ int main(void) {
 	tree.insert(4);
 	tree.insert(2);
 
-	cout << "inoder print: "; //¿À¸§Â÷¼ø
+	cout << "inoder print: "; //ì˜¤ë¦„ì°¨ìˆœ
 	tree.inorder();
 
 	cout << endl << endl;
